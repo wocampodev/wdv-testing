@@ -1,11 +1,18 @@
 package dev.wocampo.learn;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 public class CalculatorTest {
     private Calculator calculator;
+    @Mock
+    private CalculatorOnAzure calculatorOnAzure;
 
     @BeforeAll
     public static void setUp() {
@@ -14,7 +21,8 @@ public class CalculatorTest {
 
     @BeforeEach
     public void init() {
-        calculator = new Calculator();
+        // calculator = new Calculator(UtilMock.calculatorOnAzure());
+        calculator = new Calculator(calculatorOnAzure);
     }
 
     @Test
@@ -59,5 +67,12 @@ public class CalculatorTest {
                 () -> { assertEquals(20, calculator.multiply(5, numbers[3])); },
                 () -> { assertEquals(25, calculator.multiply(5, numbers[4])); }
         );
+    }
+
+    @Test
+    @DisplayName(value = "This test is handle with other inner dependency")
+    public void handle_test_with_dependency() {
+        when(calculator.addOnAzure(33, 33)).thenReturn(66.0);
+        assertEquals(66, calculator.addOnAzure(33, 33));
     }
 }
