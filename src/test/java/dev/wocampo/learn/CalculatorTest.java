@@ -27,29 +27,29 @@ public class CalculatorTest {
 
     @Test
     @DisplayName(value = "This method test if two numbers are added correctly")
-    public void add() {
+    void add() {
         assertEquals(100.00, calculator.add(50, 50));
     }
 
     @Test
-    public void subtract() {
+    void subtract() {
         assertEquals(10.00, calculator.subtract(60, 50));
     }
 
     @Test
-    public void multiply() {
+    void multiply() {
         assertEquals(100.00, calculator.multiply(10.00, 10.00));
     }
 
     @Test
     @Disabled(value = "This [split] test was ignored because isn't done yet")
-    public void split() {
+    void split() {
         assertEquals(12.00, calculator.split(60, 5.0));
     }
 
     @Test
     @DisplayName(value = "This test handle an exception expected")
-    public void handle_exception_thrown() {
+    void handle_exception_thrown() {
         assertThrows(ArithmeticException.class, () -> {
             var result = 100 / 0;
         });
@@ -57,7 +57,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName(value = "This test handle multiple assertions")
-    public void handle_multiple_assertions() {
+    void handle_multiple_assertions() {
         // if only single assertion fail then the test fail
         final int[] numbers = {1, 2, 3, 4, 5};
         assertAll("Handle multiple assertions",
@@ -71,7 +71,7 @@ public class CalculatorTest {
 
     @Test
     @DisplayName(value = "This test is handle with other inner dependency")
-    public void handle_test_with_dependency() {
+    void handle_test_with_dependency() {
         when(calculator.addOnAzure(33, 33)).thenReturn(66.0);
         assertEquals(66, calculator.addOnAzure(33, 33));
     }
